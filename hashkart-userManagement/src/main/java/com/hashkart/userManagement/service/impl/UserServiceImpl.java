@@ -18,4 +18,19 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() {
         return userRepo.findAll();
     }
+
+    @Override
+    public User getByAadhaar(String aadhaar) {
+        return userRepo.findByAadhaar(aadhaar);
+    }
+
+    @Override
+    public List<User> getAllUserByName(String name) {
+        return userRepo.findByName(name);
+    }
+
+    @Override
+    public User saveUser(User user) {
+        return userRepo.save(user);
+    }
 }

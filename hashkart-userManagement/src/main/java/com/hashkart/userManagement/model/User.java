@@ -11,6 +11,7 @@ public class User {
     @Id
     private String id;
     private String name;
+    private String aadhaar;
 
     public String getId() {
         return id;
@@ -27,4 +28,13 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getAadhaar() {
+        return aadhaar;
+    }
+
+    public void setAadhaar(String aadhaar) {
+        this.aadhaar = aadhaar;
+    }
+
 }
