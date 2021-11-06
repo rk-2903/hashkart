@@ -1,4 +1,4 @@
-package com.hashkart.orderManagement.service;
+package com.hashkart.cartManagement.service;
 
 import org.springframework.stereotype.Service;
 

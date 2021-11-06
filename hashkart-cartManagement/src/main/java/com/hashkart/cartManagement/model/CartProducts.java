@@ -1,4 +1,4 @@
-package com.hashkart.orderManagement.model;
+package com.hashkart.cartManagement.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -18,7 +18,20 @@ public class CartProducts {
 
     @ManyToOne
     @JsonIgnore
-    public OrderDetails order_details;
+    public Cart cart;
+
+    public CartProducts() {
+    }
+
+    public CartProducts(int productId, String productName, String price, String description,
+                        Long timeStamp, Cart cart) {
+        this.productId = productId;
+        this.productName = productName;
+        this.price = price;
+        this.description = description;
+        this.timeStamp = timeStamp;
+        this.cart = cart;
+    }
 
     public int getProductId() {
         return productId;
@@ -28,12 +41,12 @@ public class CartProducts {
         this.productId = productId;
     }
 
-    public OrderDetails getOrder_details() {
-        return order_details;
+    public Cart getCart() {
+        return cart;
     }
 
-    public void setOrder_details(OrderDetails order_details) {
-        this.order_details = order_details;
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
     public String getProductName() {

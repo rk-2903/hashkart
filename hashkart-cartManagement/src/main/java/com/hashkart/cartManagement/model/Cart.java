@@ -1,18 +1,18 @@
-package com.hashkart.orderManagement.model;
+package com.hashkart.cartManagement.model;
 
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-public class OrderDetails {
+public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int orderId;
     private String orderDate;
     private String userId;
-    @OneToMany(mappedBy = "order_details")
+    @OneToMany(mappedBy = "cart")
     private List<CartProducts> cartProducts;
     private String totalAmount;
 
