@@ -14,7 +14,7 @@ public class CartProducts {
     private String productName;
     private String price;
     private String description;
-    private Long timeStamp;
+    private int quantity;
 
     @ManyToOne
     @JsonIgnore
@@ -23,15 +23,15 @@ public class CartProducts {
     public CartProducts() {
     }
 
-    public CartProducts(int productId, String productName, String price, String description,
-                        Long timeStamp, Cart cart) {
+    public CartProducts(int productId, String productName, String price, String description, int quantity, Cart cart) {
         this.productId = productId;
         this.productName = productName;
         this.price = price;
         this.description = description;
-        this.timeStamp = timeStamp;
+        this.quantity = quantity;
         this.cart = cart;
     }
+
 
     public int getProductId() {
         return productId;
@@ -73,11 +73,11 @@ public class CartProducts {
         this.description = description;
     }
 
-    public Long getTimeStamp() {
-        return timeStamp;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setTimeStamp(Long timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

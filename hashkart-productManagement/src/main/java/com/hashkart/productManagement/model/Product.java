@@ -12,6 +12,7 @@ public class Product {
     private String price;
     private String description;
     private Long timeStamp;
+    private int quantity;
 
     public int getProductId() {
         return productId;
@@ -51,5 +52,13 @@ public class Product {
 
     public void setTimeStamp(Long timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

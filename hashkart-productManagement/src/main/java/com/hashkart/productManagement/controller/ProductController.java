@@ -4,10 +4,7 @@ import com.hashkart.productManagement.model.Product;
 import com.hashkart.productManagement.service.impl.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +22,15 @@ public class ProductController {
     @PostMapping("/products")
     public void saveProduct(@RequestBody Product product) {
         productService.save(product);
+    }
+
+    @GetMapping("/products/{id}")
+    public ResponseEntity<Product> getProductById(@PathVariable int id) {
+        return ResponseEntity.ok().body(productService.getProductById(id));
+    }
+
+    @DeleteMapping("/products/{id}")
+    public void deleteProductById(@PathVariable int id) {
+        productService.deleteProductById(id);
     }
 }
