@@ -1,23 +1,24 @@
 package com.hashkart.userManagement.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class User {
 
     @Id
-    private String userId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int userId;
     private String name;
-    private String aadhaar;
+    private String password;
+    private String contact;
+    private String address;
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -29,12 +30,27 @@ public class User {
         this.name = name;
     }
 
-    public String getAadhaar() {
-        return aadhaar;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAadhaar(String aadhaar) {
-        this.aadhaar = aadhaar;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

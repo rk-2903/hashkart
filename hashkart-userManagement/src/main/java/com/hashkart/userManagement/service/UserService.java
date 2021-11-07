@@ -7,9 +7,7 @@ import java.util.List;
 public interface UserService {
     List<User> findAll();
 
-    User getByAadhaar(String aadhaar);
-
-    List<User> getAllUserByName(String name);
+    User getByUserId(int userId);
 
     User saveUser(User user);
 }

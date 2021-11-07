@@ -4,6 +4,7 @@ import com.hashkart.cartManagement.model.Product;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name="hashkart-productManagment")
@@ -18,4 +19,6 @@ public interface ProductServiceProxy {
     @GetMapping("/products/{id}")
     Product getProductById(@PathVariable int id);
 
+    @PatchMapping("/product/{id}/quantity/{quantity}")
+    Product updateProductQuantity(@PathVariable int id,@PathVariable int quantity);
 }

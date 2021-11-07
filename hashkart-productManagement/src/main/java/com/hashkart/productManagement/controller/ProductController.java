@@ -33,4 +33,16 @@ public class ProductController {
     public void deleteProductById(@PathVariable int id) {
         productService.deleteProductById(id);
     }
+
+    /**
+     *
+     * @param id
+     * @param quantity
+     * @return Updated product if the quantity of product is available.
+     */
+    @PatchMapping("/product/{id}/quantity/{quantity}")
+    public ResponseEntity<Product> updateProductQuantity(@PathVariable int id,
+                                                         @PathVariable int quantity) {
+        return ResponseEntity.ok().body(productService.updateProductQuantity(id, quantity));
+    }
 }

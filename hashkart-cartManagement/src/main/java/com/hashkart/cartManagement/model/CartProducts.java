@@ -12,7 +12,7 @@ public class CartProducts {
     @Id
     private int productId;
     private String productName;
-    private String price;
+    private int price;
     private String description;
     private int quantity;
 
@@ -23,7 +23,7 @@ public class CartProducts {
     public CartProducts() {
     }
 
-    public CartProducts(int productId, String productName, String price, String description, int quantity, Cart cart) {
+    public CartProducts(int productId, String productName, int price, String description, int quantity, Cart cart) {
         this.productId = productId;
         this.productName = productName;
         this.price = price;
@@ -57,11 +57,11 @@ public class CartProducts {
         this.productName = productName;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

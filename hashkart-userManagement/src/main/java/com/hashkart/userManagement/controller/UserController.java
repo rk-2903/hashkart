@@ -20,13 +20,9 @@ public class UserController {
         return ResponseEntity.ok().body(userService.findAll());
     }
 
-    @GetMapping("/users/{aadhaar}")
-    public ResponseEntity<User> getUserByAadhaar(@PathVariable String aadhaar ) {
-        return ResponseEntity.ok().body(userService.getByAadhaar(aadhaar));
-    }
-    @GetMapping("/users-by-name")
-    public List<User> getAllUserByName(@RequestParam String name) {
-        return userService.getAllUserByName(name);
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<User> getUserByUserId(@PathVariable int userId ) {
+        return ResponseEntity.ok().body(userService.getByUserId(userId));
     }
 
     @PostMapping("/users")

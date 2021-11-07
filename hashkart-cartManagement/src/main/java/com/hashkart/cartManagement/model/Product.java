@@ -1,9 +1,10 @@
 package com.hashkart.cartManagement.model;
 
 public class Product {
+
     private int productId;
     private String productName;
-    private String price;
+    private int price;
     private String description;
     private int quantity;
 
@@ -23,11 +24,11 @@ public class Product {
         this.productName = productName;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

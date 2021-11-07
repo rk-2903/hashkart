@@ -20,13 +20,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getByAadhaar(String aadhaar) {
-        return userRepo.findByAadhaar(aadhaar);
-    }
-
-    @Override
-    public List<User> getAllUserByName(String name) {
-        return userRepo.findByName(name);
+    public User getByUserId(int userId) {
+        return userRepo.findByUserId(userId);
     }
 
     @Override
