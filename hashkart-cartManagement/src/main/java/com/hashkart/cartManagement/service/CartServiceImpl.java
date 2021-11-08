@@ -7,6 +7,7 @@ import com.hashkart.cartManagement.repo.CartProductRepo;
 import com.hashkart.cartManagement.repo.CartRepo;
 import com.hashkart.cartManagement.serviceproxy.ProductServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -15,6 +16,9 @@ import java.util.Optional;
 
 @Service
 public class CartServiceImpl implements CartService {
+
+    @Value("${cart.discount.percent}")
+    private int cartDiscountPercentage;
 
     @Autowired
     private CartRepo cartRepo;
@@ -59,13 +63,20 @@ public class CartServiceImpl implements CartService {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-            cartInfo.get().setTotalAmount(cartInfo.get()
+            int totalCartAmount = cartInfo.get()
                     .getCartProducts()
                     .stream()
                     .mapToInt(CartProducts::getPrice)
-                    .sum());
+                    .sum();
+            cartInfo.get().setTotalAmount(totalCartAmount);
+            if (totalCartAmount >= 10000) {
+                cartInfo.get().setDiscountPercent(cartDiscountPercentage);
+                cartInfo.get().setDiscountedAmount(totalCartAmount-((cartDiscountPercentage/100)* totalCartAmount));
+            } else {
+                cartInfo.get().setDiscountPercent(0);
+                cartInfo.get().setDiscountedAmount(totalCartAmount);
+            }
             cartRepo.save(cartInfo.get());
-            this.calculateTotalAmountOfCart(cartId);
             return "Product added to cart.";
         } else if (product.getQuantity() < quantity && product.getQuantity() !=0) {
             return "Maximum "+ product.getQuantity() + " " + product.getProductName() + " can be added int the cart";

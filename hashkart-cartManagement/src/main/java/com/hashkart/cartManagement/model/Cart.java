@@ -15,6 +15,8 @@ public class Cart {
     @OneToMany(mappedBy = "cart")
     private List<CartProducts> cartProducts;
     private int totalAmount;
+    private int discountPercent;
+    private int discountedAmount;
 
     public int getCartId() {
         return cartId;
@@ -54,5 +56,21 @@ public class Cart {
 
     public void setTotalAmount(int totalAmount) {
         this.totalAmount = totalAmount;
+    }
+
+    public int getDiscountPercent() {
+        return discountPercent;
+    }
+
+    public void setDiscountPercent(int discountPercent) {
+        this.discountPercent = discountPercent;
+    }
+
+    public int getDiscountedAmount() {
+        return discountedAmount;
+    }
+
+    public void setDiscountedAmount(int discountedAmount) {
+        this.discountedAmount = discountedAmount;
     }
 }
