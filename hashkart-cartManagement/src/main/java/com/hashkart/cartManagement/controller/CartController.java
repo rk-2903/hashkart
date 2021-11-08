@@ -37,4 +37,8 @@ public class CartController {
         return cartService.calculateTotalAmountOfCart(cartId);
     }
 
+    @DeleteMapping("/cart/{id}")
+    public void deleteById(@PathVariable int id) {
+        cartService.deleteById(id);
+    }
 }

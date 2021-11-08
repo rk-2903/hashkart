@@ -12,4 +12,6 @@ public interface CartService {
     Cart save(Cart cart);
 
     int calculateTotalAmountOfCart(int cartId);
+
+    void deleteById(int id);
 }

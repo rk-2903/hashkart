@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -47,35 +46,26 @@ public class CartServiceImpl implements CartService {
         Product product = productServiceProxy.getProductById(productId);
 
         if (product.getQuantity() >= quantity && cartInfo.isPresent()) {
-            // check if product is already added in the cart.
-            if (cartInfo.get().getCartProducts().stream()
-                    .map(CartProducts::getProductId).collect(Collectors.toList()).contains(productId)) {
-                cartInfo.get()
-                        .setTotalAmount(cartInfo.get().getTotalAmount() -
-                                product.getPrice() * product.getQuantity());
-
-                cartInfo.get().getCartProducts().forEach(i -> {
-                    if (i.getProductId() == productId) {
-                        i.setQuantity(i.getQuantity()+quantity);
-                    }
-                });
-            } else {
-                CartProducts cartProducts = new CartProducts(
-                        product.getProductId(),
-                        product.getProductName(),
-                        product.getPrice(),
-                        product.getDescription(),
-                        quantity,
-                        cartInfo.get());
-                cartProductRepo.save(cartProducts);
-            }
+            CartProducts cartProducts = new CartProducts(
+                    product.getProductId(),
+                    product.getProductName(),
+                    product.getPrice()*quantity,
+                    product.getDescription(),
+                    quantity,
+                    cartInfo.get());
             try {
+                cartProductRepo.save(cartProducts);
                 productServiceProxy.updateProductQuantity(productId, quantity);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-            cartInfo.get().setTotalAmount(cartInfo.get().getTotalAmount() + product.getPrice() * product.getQuantity());
+            cartInfo.get().setTotalAmount(cartInfo.get()
+                    .getCartProducts()
+                    .stream()
+                    .mapToInt(CartProducts::getPrice)
+                    .sum());
             cartRepo.save(cartInfo.get());
+            this.calculateTotalAmountOfCart(cartId);
             return "Product added to cart.";
         } else if (product.getQuantity() < quantity && product.getQuantity() !=0) {
             return "Maximum "+ product.getQuantity() + " " + product.getProductName() + " can be added int the cart";
@@ -92,6 +82,11 @@ public class CartServiceImpl implements CartService {
                 .stream()
                 .mapToInt(CartProducts::getPrice)
                 .sum();
+    }
+
+    @Override
+    public void deleteById(int id) {
+        cartRepo.deleteById(id);
     }
 
 }
