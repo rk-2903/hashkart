@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @FeignClient(name="hashkart-productManagment")
 public interface ProductServiceProxy {
@@ -19,6 +20,6 @@ public interface ProductServiceProxy {
     @GetMapping("/products/{id}")
     Product getProductById(@PathVariable int id);
 
-    @PatchMapping("/products/{id}/quantity/{quantity}")
+    @PutMapping("/products/{id}/quantity/{quantity}")
     Product updateProductQuantity(@PathVariable int id,@PathVariable int quantity);
 }

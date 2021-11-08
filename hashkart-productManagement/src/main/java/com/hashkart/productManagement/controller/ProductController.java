@@ -40,7 +40,7 @@ public class ProductController {
      * @param quantity
      * @return Updated product if the quantity of product is available.
      */
-    @PatchMapping("/products/{id}/quantity/{quantity}")
+    @PutMapping("/products/{id}/quantity/{quantity}")
     public ResponseEntity<Product> updateProductQuantity(@PathVariable int id,
                                                          @PathVariable int quantity) {
         return ResponseEntity.ok().body(productService.updateProductQuantity(id, quantity));
