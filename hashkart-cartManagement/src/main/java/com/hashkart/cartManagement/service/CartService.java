@@ -5,7 +5,7 @@ import com.hashkart.cartManagement.model.Cart;
 import java.util.List;
 
 public interface CartService {
-    String addProductInCart(int cartId, int productId, int quantity);
+    String addProductInCart(int userId, int cartId, int productId, int quantity) throws Exception;
 
     List<Cart> findAll();
 

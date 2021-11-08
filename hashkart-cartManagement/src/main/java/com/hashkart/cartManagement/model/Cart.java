@@ -9,19 +9,19 @@ public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int orderId;
+    private int cartId;
     private String orderDate;
-    private String userId;
+    private int userId;
     @OneToMany(mappedBy = "cart")
     private List<CartProducts> cartProducts;
-    private String totalAmount;
+    private int totalAmount;
 
-    public int getOrderId() {
-        return orderId;
+    public int getCartId() {
+        return cartId;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setCartId(int cartId) {
+        this.cartId = cartId;
     }
 
     public String getOrderDate() {
@@ -32,11 +32,11 @@ public class Cart {
         this.orderDate = orderDate;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -48,11 +48,11 @@ public class Cart {
         this.cartProducts = cartProducts;
     }
 
-    public String getTotalAmount() {
+    public int getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(String totalAmount) {
+    public void setTotalAmount(int totalAmount) {
         this.totalAmount = totalAmount;
     }
 }

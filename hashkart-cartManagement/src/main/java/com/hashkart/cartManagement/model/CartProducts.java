@@ -23,7 +23,8 @@ public class CartProducts {
     public CartProducts() {
     }
 
-    public CartProducts(int productId, String productName, int price, String description, int quantity, Cart cart) {
+    public CartProducts(int productId, String productName, int price,
+                        String description, int quantity, Cart cart) {
         this.productId = productId;
         this.productName = productName;
         this.price = price;
@@ -62,7 +63,7 @@ public class CartProducts {
     }
 
     public void setPrice(int price) {
-        this.price = price;
+        this.price = Math.max(price, 0);
     }
 
     public String getDescription() {

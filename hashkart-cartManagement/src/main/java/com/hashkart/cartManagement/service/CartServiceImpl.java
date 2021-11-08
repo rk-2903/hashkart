@@ -9,6 +9,7 @@ import com.hashkart.cartManagement.serviceproxy.ProductServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,9 +34,14 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public String addProductInCart(int cartId, int productId, int quantity) {
+    public String addProductInCart(int userId, int cartId, int productId, int quantity) throws Exception {
 
-        Optional<Cart> cartInfo = cartRepo.findById(cartId);
+        Optional<Cart> cartInfo;
+        try {
+            cartInfo = Optional.ofNullable(cartRepo.findByCartIdAndUserId(cartId, userId));
+        } catch (Exception e) {
+            throw new Exception("error while fetching data"+ Arrays.toString(e.getStackTrace()));
+        }
         // fetch product by it's id.. using proxy..
         Product product = productServiceProxy.getProductById(productId);
 
@@ -53,7 +59,9 @@ public class CartServiceImpl implements CartService {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-            return "Product added to cart.";
+            cartInfo.get().setTotalAmount(cartInfo.get().getTotalAmount() + product.getPrice() * quantity);
+            cartRepo.save(cartInfo.get());
+            return "Product added to cart." + product;
         } else if (product.getQuantity() < quantity && product.getQuantity() !=0) {
             return "Maximum "+ quantity + " can be added int he cart";
         } else {

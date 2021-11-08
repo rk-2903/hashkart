@@ -19,6 +19,6 @@ public interface ProductServiceProxy {
     @GetMapping("/products/{id}")
     Product getProductById(@PathVariable int id);
 
-    @PatchMapping("/product/{id}/quantity/{quantity}")
+    @PatchMapping("/products/{id}/quantity/{quantity}")
     Product updateProductQuantity(@PathVariable int id,@PathVariable int quantity);
 }

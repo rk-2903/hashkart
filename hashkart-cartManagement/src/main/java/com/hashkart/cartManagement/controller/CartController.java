@@ -24,11 +24,12 @@ public class CartController {
         return cartService.save(cart);
     }
 
-    @PostMapping("/cart/{cartId}/product/{productId}/quantity/{quantity}")
+    @PostMapping("cart/{cartId}/user/{userId}/product/{productId}/quantity/{quantity}")
     public String addProductInCart(@PathVariable int cartId,
-                                 @PathVariable int productId,
-                                   @PathVariable int quantity) {
-        return cartService.addProductInCart(cartId, productId, quantity);
+                                   @PathVariable int userId,
+                                   @PathVariable int productId,
+                                   @PathVariable int quantity) throws Exception {
+        return cartService.addProductInCart(userId, cartId, productId, quantity);
     }
 
     @GetMapping("/cart/{cartId}/total-amount")
